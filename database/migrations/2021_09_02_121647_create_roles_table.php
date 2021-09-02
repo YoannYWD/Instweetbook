@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuacksTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateQuacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('quacks', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('content');
-            $table->string('image');
-            $table->string('tags');
-            $table->timestamps();
+            $table->string('name');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateQuacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quacks');
+        Schema::dropIfExists('roles');
     }
 }
