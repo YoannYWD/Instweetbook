@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/profil', [App\Http\Controllers\UserController::class, 'profil'])->name('profil');
+Route::get('/profil', [App\Http\Controllers\UserController::class, 'index'])->name('profil');
 Route::resource('/user', App\Http\Controllers\UserController::class)->except('create');
 Route::resource('/comment', App\Http\Controllers\UserController::class)->except('create');
 Route::resource('/post', App\Http\Controllers\UserController::class)->except('create');
