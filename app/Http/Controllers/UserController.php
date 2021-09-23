@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,7 +14,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('user/profil');
+        $user = User::findOrFail(auth()->id());
+        return view('user/index', compact('user'));
     }
 
     /**
@@ -58,6 +59,17 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $id = auth()->id();
+        $user = User::findOrFail($id);
+        return view('user/edit', compact('user'));
+    }
+
+    public function editPassword($id)
+    {
+        //
+        $id = auth()->id();
+        $user = User::findOrFail($id);
+        return view('user/edit-password', compact('user'));
     }
 
     /**
@@ -70,6 +82,28 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::findOrFail($id);
+        $updateUser = $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'nickname' => 'required'
+        ]);
+        if ($request->email) {
+            if ($request->email == $user->email ) {
+                $request->validate([
+                    'email' => 'required|email'
+                ]);
+            } else {
+                $request->validate([
+                    'email' => 'required|email|unique:users'
+                ]);
+            }
+        };
+
+        $updateUser = $request->except(['_token', '_method']);
+
+        User::whereId($id)->update($updateUser);
+        return redirect('/user')->with('message', 'Profil modifié');
     }
 
     /**
@@ -81,5 +115,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect('/login')->with('message', 'Profil supprimé');
     }
 }

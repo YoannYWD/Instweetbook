@@ -21,7 +21,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/profil', [App\Http\Controllers\UserController::class, 'index'])->name('profil');
 Route::resource('/user', App\Http\Controllers\UserController::class)->except('create');
-Route::resource('/comment', App\Http\Controllers\UserController::class)->except('create');
-Route::resource('/post', App\Http\Controllers\UserController::class)->except('create');
+Route::get('/user/{user}/new-password', [App\Http\Controllers\UserController::class, 'editPassword'])->name('newpassword.edit');
+Route::post('/user/{user}/new-password', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('newpassword.update');
+
+

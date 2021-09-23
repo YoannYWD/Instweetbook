@@ -12,7 +12,7 @@
 <header class="text-center">
     <nav class="navbar navbar-expand-md navbar-light shadow-sm mb-5" style="background-color: #e3f2fd;">
         <div class="container">
-            <a class="navbar-brand ml-2" href="/">
+            <a class="navbar-brand ml-2" href="/home">
                 InsTweetBook
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -28,11 +28,11 @@
                     @guest
                     <!--si user pas connecté : login et register-->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('connexion') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Connexion') }}</a>
                     </li>
                     @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('inscription') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Inscription') }}</a>
                     </li>
                     @endif
                     @else
@@ -56,7 +56,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profil') }}">{{ __('Profil') }}</a>
+                        <a class="nav-link" href="{{ route('user.index') }}">{{ __('Profil') }}</a>
                     </li>
                     @endguest
                 </ul>
